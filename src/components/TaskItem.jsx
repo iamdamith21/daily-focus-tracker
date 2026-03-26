@@ -1,15 +1,19 @@
+import "./TaskItem.css";
+
 function TaskItem({ task, onComplete, onDelete }) {
   return (
-    <div>
-      <span
-        style={{
-          textDecoration: task.completed ? "line-through" : "none",
-        }}
-      >
+    <div className={`task-item ${task.completed ? "completed" : ""}`}>
+      <span className={`task-text ${task.completed ? "completed" : ""}`}>
         {task.text}
       </span>
-      <button onClick={() => onComplete(task.id)}>✓</button>
-      <button onClick={() => onDelete(task.id)}>✕</button>
+      <button
+        className="task-btn complete-btn"
+        onClick={() => onComplete(task.id)}
+      >✓</button>
+      <button
+        className="task-btn delete-btn"
+        onClick={() => onDelete(task.id)}
+      >✕</button>
     </div>
   );
 }
