@@ -1,0 +1,42 @@
+.streak-card {
+  background: #1a1a24;
+  border: 1px solid #2a2a3a;
+  border-radius: 16px;
+  padding: 18px 24px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.3s;
+}
+
+.streak-card.streak-hot {
+  border-color: #f97316;
+}
+
+.streak-flame {
+  font-size: 2rem;
+}
+
+.streak-info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.streak-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.streak-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.streak-msg {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}

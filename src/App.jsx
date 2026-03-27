@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
 import ProgressBar from "./components/ProgressBar";
+import StreakCounter from "./components/StreakCounter";
 import "./App.css";
 
 function App() {
@@ -15,6 +16,15 @@ function App() {
     return saved ? Number(saved) : 5;
   });
 
+  const [streak, setStreak] = useState(() => {
+    const saved = localStorage.getItem("streak");
+    return saved ? Number(saved) : 0;
+  });
+
+  const [lastCompletedDate, setLastCompletedDate] = useState(() => {
+    return localStorage.getItem("lastCompletedDate") || null;
+  });
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -22,6 +32,39 @@ function App() {
   useEffect(() => {
     localStorage.setItem("goal", goal);
   }, [goal]);
+
+  useEffect(() => {
+    localStorage.setItem("streak", streak);
+  }, [streak]);
+
+  useEffect(() => {
+    if (lastCompletedDate) {
+      localStorage.setItem("lastCompletedDate", lastCompletedDate);
+    }
+  }, [lastCompletedDate]);
+
+  const completedCount = tasks.filter((task) => task.completed).length;
+  const isGoalComplete = goal > 0 && completedCount >= goal;
+
+  useEffect(() => {
+    if (!isGoalComplete) return;
+
+    const today = new Date().toISOString().split("T")[0];
+
+    if (lastCompletedDate === today) return;
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split("T")[0];
+
+    if (lastCompletedDate === yesterdayStr) {
+      setStreak((s) => s + 1);
+    } else {
+      setStreak(1);
+    }
+
+    setLastCompletedDate(today);
+  }, [isGoalComplete]);
 
   function handleAddTask(taskText) {
     const newTask = {
@@ -44,14 +87,14 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
-  const completedCount = tasks.filter((task) => task.completed).length;
-
   return (
     <div className="app-container">
       <div className="app-header">
         <h1>Daily Focus Tracker</h1>
         <p className="app-subtitle">අද දවසේ focus කරන්න</p>
       </div>
+
+      <StreakCounter streak={streak} />
 
       <div className="goal-section">
         <span className="goal-label">දවසේ goal:</span>
