@@ -3,6 +3,7 @@ import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
 import ProgressBar from "./components/ProgressBar";
 import StreakCounter from "./components/StreakCounter";
+import WeekSummary from "./components/WeekSummary";
 import "./App.css";
 
 function App() {
@@ -25,6 +26,11 @@ function App() {
     return localStorage.getItem("lastCompletedDate") || null;
   });
 
+  const [weekHistory, setWeekHistory] = useState(() => {
+    const saved = localStorage.getItem("weekHistory");
+    return saved ? JSON.parse(saved) : {};
+  });
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -38,6 +44,10 @@ function App() {
   }, [streak]);
 
   useEffect(() => {
+    localStorage.setItem("weekHistory", JSON.stringify(weekHistory));
+  }, [weekHistory]);
+
+  useEffect(() => {
     if (lastCompletedDate) {
       localStorage.setItem("lastCompletedDate", lastCompletedDate);
     }
@@ -47,10 +57,17 @@ function App() {
   const isGoalComplete = goal > 0 && completedCount >= goal;
 
   useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setWeekHistory((prev) => ({
+      ...prev,
+      [today]: completedCount,
+    }));
+  }, [completedCount]);
+
+  useEffect(() => {
     if (!isGoalComplete) return;
 
     const today = new Date().toISOString().split("T")[0];
-
     if (lastCompletedDate === today) return;
 
     const yesterday = new Date();
@@ -110,6 +127,7 @@ function App() {
       </div>
 
       <ProgressBar completed={completedCount} goal={goal} />
+      <WeekSummary weekHistory={weekHistory} goal={goal} />
       <TaskInput onAddTask={handleAddTask} />
       <TaskList
         tasks={tasks}
