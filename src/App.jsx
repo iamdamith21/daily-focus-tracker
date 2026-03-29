@@ -4,6 +4,7 @@ import TaskList from "./components/TaskList";
 import ProgressBar from "./components/ProgressBar";
 import StreakCounter from "./components/StreakCounter";
 import WeekSummary from "./components/WeekSummary";
+import ExportButton from "./components/ExportButton";
 import "./App.css";
 
 function App() {
@@ -128,6 +129,7 @@ function App() {
 
       <ProgressBar completed={completedCount} goal={goal} />
       <WeekSummary weekHistory={weekHistory} goal={goal} />
+      <ExportButton tasks={tasks} weekHistory={weekHistory} />
       <TaskInput onAddTask={handleAddTask} />
       <TaskList
         tasks={tasks}
