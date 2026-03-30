@@ -3,12 +3,15 @@ import "./TaskInput.css";
 
 function TaskInput({ onAddTask }) {
   const [inputValue, setInputValue] = useState("");
+  const [isPulsing, setIsPulsing] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (inputValue.trim() === "") return;
     onAddTask(inputValue);
     setInputValue("");
+    setIsPulsing(true);
+    setTimeout(() => setIsPulsing(false), 300);
   }
 
   return (
@@ -20,7 +23,12 @@ function TaskInput({ onAddTask }) {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Add a new task..."
       />
-      <button className="task-add-btn" type="submit">Add</button>
+      <button
+        className={`task-add-btn ${isPulsing ? "pulse" : ""}`}
+        type="submit"
+      >
+        Add
+      </button>
     </form>
   );
 }

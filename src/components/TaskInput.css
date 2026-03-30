@@ -43,3 +43,13 @@
 .task-add-btn:hover {
   background: #c4b5fd;
 }
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+.task-add-btn.pulse {
+  animation: pulse 0.3s ease;
+}
