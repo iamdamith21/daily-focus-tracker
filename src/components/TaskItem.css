@@ -50,3 +50,26 @@
   border-color: #f87171;
   color: #0f0f13;
 }
+
+.priority-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+.priority-high {
+  background: #3b1219;
+  color: #f87171;
+}
+
+.priority-medium {
+  background: #2d2510;
+  color: #fbbf24;
+}
+
+.priority-low {
+  background: #0f2818;
+  color: #34d399;
+}

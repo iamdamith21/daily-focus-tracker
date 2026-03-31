@@ -32,6 +32,8 @@ function App() {
     return saved ? JSON.parse(saved) : {};
   });
 
+  const [sortByPriority, setSortByPriority] = useState(true);
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -67,28 +69,34 @@ function App() {
 
   useEffect(() => {
     if (!isGoalComplete) return;
-
     const today = new Date().toISOString().split("T")[0];
     if (lastCompletedDate === today) return;
-
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayStr = yesterday.toISOString().split("T")[0];
-
     if (lastCompletedDate === yesterdayStr) {
       setStreak((s) => s + 1);
     } else {
       setStreak(1);
     }
-
     setLastCompletedDate(today);
   }, [isGoalComplete]);
 
-  function handleAddTask(taskText) {
+  const priorityOrder = { high: 0, medium: 1, low: 2 };
+
+  const sortedTasks = sortByPriority
+    ? [...tasks].sort((a, b) => {
+        if (a.completed !== b.completed) return a.completed ? 1 : -1;
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      })
+    : tasks;
+
+  function handleAddTask(taskText, priority) {
     const newTask = {
       id: Date.now(),
       text: taskText,
       completed: false,
+      priority: priority,
     };
     setTasks([...tasks, newTask]);
   }
@@ -125,6 +133,12 @@ function App() {
           onChange={(e) => setGoal(Number(e.target.value))}
         />
         <span className="goal-tasks-label">tasks</span>
+        <button
+          className={`sort-btn ${sortByPriority ? "active" : ""}`}
+          onClick={() => setSortByPriority(!sortByPriority)}
+        >
+          {sortByPriority ? "↕ Priority" : "↕ Added"}
+        </button>
       </div>
 
       <ProgressBar completed={completedCount} goal={goal} />
@@ -132,7 +146,7 @@ function App() {
       <ExportButton tasks={tasks} weekHistory={weekHistory} />
       <TaskInput onAddTask={handleAddTask} />
       <TaskList
-        tasks={tasks}
+        tasks={sortedTasks}
         onComplete={handleComplete}
         onDelete={handleDelete}
       />
