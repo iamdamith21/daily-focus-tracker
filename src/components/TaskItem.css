@@ -73,3 +73,18 @@
   background: #0f2818;
   color: #34d399;
 }
+
+.task-item.editing {
+  border-color: #a78bfa;
+}
+
+.task-edit-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #a78bfa;
+  color: #e8e8f0;
+  font-size: 0.95rem;
+  outline: none;
+  padding: 2px 4px;
+}

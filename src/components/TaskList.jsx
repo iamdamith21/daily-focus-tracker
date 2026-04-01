@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem";
 import "./TaskList.css";
 
-function TaskList({ tasks, onComplete, onDelete }) {
+function TaskList({ tasks, onComplete, onDelete, onEdit }) {
   if (tasks.length === 0) {
     return <p className="empty-message">No tasks yet. Add one above!</p>;
   }
@@ -14,6 +14,7 @@ function TaskList({ tasks, onComplete, onDelete }) {
           task={task}
           onComplete={onComplete}
           onDelete={onDelete}
+          onEdit={onEdit}
         />
       ))}
     </ul>

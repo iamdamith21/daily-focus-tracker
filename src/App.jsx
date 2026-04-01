@@ -113,6 +113,14 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
+  function handleEdit(id, newText) {
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? { ...task, text: newText } : task
+    )
+  );
+}
+
   return (
     <div className="app-container">
       <div className="app-header">
@@ -149,6 +157,7 @@ function App() {
         tasks={sortedTasks}
         onComplete={handleComplete}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
     </div>
   );
