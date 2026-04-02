@@ -65,3 +65,23 @@
   border-color: #a78bfa;
   color: #a78bfa;
 }
+
+@media (max-width: 480px) {
+  .task-input-section {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .priority-select {
+    width: 100%;
+  }
+
+  .task-input-field {
+    width: 100%;
+  }
+
+  .task-add-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}

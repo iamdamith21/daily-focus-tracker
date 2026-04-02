@@ -18,3 +18,9 @@
   margin: 8px 0 0;
   text-align: center;
 }
+
+@media (max-width: 480px) {
+  .week-summary-card {
+    padding: 16px 12px;
+  }
+}

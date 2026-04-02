@@ -88,3 +88,25 @@
   outline: none;
   padding: 2px 4px;
 }
+
+@media (max-width: 480px) {
+  .task-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .task-text {
+    width: 100%;
+    order: 2;
+  }
+
+  .priority-badge {
+    order: 1;
+  }
+
+  .task-btn {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+  }
+}
