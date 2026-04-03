@@ -1,8 +1,8 @@
 .export-btn {
   background: none;
-  border: 1px solid #3a3a4a;
+  border: 1px solid var(--border-hover);
   border-radius: 10px;
-  color: #9ca3af;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.9rem;
   padding: 10px 20px;
@@ -12,6 +12,6 @@
 }
 
 .export-btn:hover {
-  border-color: #a78bfa;
-  color: #a78bfa;
+  border-color: var(--accent);
+  color: var(--accent);
 }

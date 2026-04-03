@@ -4,36 +4,55 @@
 }
 
 .app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 32px;
 }
 
-.app-subtitle {
-  color: #6b7280;
+.app-header-text .app-subtitle {
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
 .goal-section {
-  background: #1a1a24;
-  border: 1px solid #2a2a3a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px 24px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .goal-label {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .goal-input {
   width: 64px;
-  background: #0f0f13;
-  border: 1px solid #3a3a4a;
+  background: var(--bg-input);
+  border: 1px solid var(--border-hover);
   border-radius: 8px;
-  color: #e8e8f0;
+  color: var(--text-primary);
   font-size: 1rem;
   padding: 6px 10px;
   text-align: center;
@@ -41,20 +60,20 @@
 }
 
 .goal-input:focus {
-  border-color: #a78bfa;
+  border-color: var(--accent);
 }
 
 .goal-tasks-label {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
 .sort-btn {
   margin-left: auto;
   background: none;
-  border: 1px solid #3a3a4a;
+  border: 1px solid var(--border-hover);
   border-radius: 8px;
-  color: #6b7280;
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 0.82rem;
   padding: 5px 12px;
@@ -62,26 +81,18 @@
 }
 
 .sort-btn.active {
-  border-color: #a78bfa;
-  color: #a78bfa;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 @media (max-width: 480px) {
-  .task-input-section {
+  .goal-section {
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .priority-select {
+  .sort-btn {
+    margin-left: 0;
     width: 100%;
-  }
-
-  .task-input-field {
-    width: 100%;
-  }
-
-  .task-add-btn {
-    width: 100%;
-    padding: 12px;
   }
 }

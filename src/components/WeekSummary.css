@@ -1,26 +1,24 @@
 .week-summary-card {
-  background: #1a1a24;
-  border: 1px solid #2a2a3a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px 24px;
   margin-bottom: 14px;
 }
 
 .week-summary-title {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.88rem;
   margin: 0 0 16px;
 }
 
 .week-summary-hint {
-  color: #4b5563;
+  color: var(--text-hint);
   font-size: 0.78rem;
   margin: 8px 0 0;
   text-align: center;
 }
 
 @media (max-width: 480px) {
-  .week-summary-card {
-    padding: 16px 12px;
-  }
+  .week-summary-card { padding: 16px 12px; }
 }

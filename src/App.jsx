@@ -34,6 +34,15 @@ function App() {
 
   const [sortByPriority, setSortByPriority] = useState(true);
 
+  const [theme, setTheme] = useState(() => {
+  return localStorage.getItem("theme") || "dark";
+});
+
+useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}, [theme]);
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -124,9 +133,17 @@ function App() {
   return (
     <div className="app-container">
       <div className="app-header">
-        <h1>Daily Focus Tracker</h1>
-        <p className="app-subtitle">අද දවසේ focus කරන්න</p>
-      </div>
+  <div className="app-header-text">
+    <h1>Daily Focus Tracker</h1>
+    <p className="app-subtitle">අද දවසේ focus කරන්න</p>
+  </div>
+  <button
+    className="theme-toggle"
+    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+  >
+    {theme === "dark" ? "☀️" : "🌙"}
+  </button>
+</div>
 
       <StreakCounter streak={streak} />
 

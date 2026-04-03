@@ -1,6 +1,6 @@
 .task-item {
-  background: #1a1a24;
-  border: 1px solid #2a2a3a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 16px 20px;
   display: flex;
@@ -9,30 +9,26 @@
   transition: border-color 0.2s;
 }
 
-.task-item:hover {
-  border-color: #3a3a4a;
-}
-
-.task-item.completed {
-  opacity: 0.5;
-}
+.task-item:hover { border-color: var(--border-hover); }
+.task-item.completed { opacity: 0.5; }
+.task-item.editing { border-color: var(--accent); }
 
 .task-text {
   flex: 1;
   font-size: 0.95rem;
-  color: #e8e8f0;
+  color: var(--text-primary);
 }
 
 .task-text.completed {
   text-decoration: line-through;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .task-btn {
   background: none;
-  border: 1px solid #3a3a4a;
+  border: 1px solid var(--border-hover);
   border-radius: 8px;
-  color: #9ca3af;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.85rem;
   padding: 5px 10px;
@@ -40,15 +36,15 @@
 }
 
 .task-btn.complete-btn:hover {
-  background: #34d399;
-  border-color: #34d399;
-  color: #0f0f13;
+  background: var(--success);
+  border-color: var(--success);
+  color: #ffffff;
 }
 
 .task-btn.delete-btn:hover {
-  background: #f87171;
-  border-color: #f87171;
-  color: #0f0f13;
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
 }
 
 .priority-badge {
@@ -59,54 +55,24 @@
   letter-spacing: 0.3px;
 }
 
-.priority-high {
-  background: #3b1219;
-  color: #f87171;
-}
-
-.priority-medium {
-  background: #2d2510;
-  color: #fbbf24;
-}
-
-.priority-low {
-  background: #0f2818;
-  color: #34d399;
-}
-
-.task-item.editing {
-  border-color: #a78bfa;
-}
+.priority-high { background: #3b1219; color: var(--danger); }
+.priority-medium { background: #2d2510; color: var(--warning); }
+.priority-low { background: #0f2818; color: var(--success); }
 
 .task-edit-input {
   flex: 1;
   background: transparent;
   border: none;
-  border-bottom: 1px solid #a78bfa;
-  color: #e8e8f0;
+  border-bottom: 1px solid var(--accent);
+  color: var(--text-primary);
   font-size: 0.95rem;
   outline: none;
   padding: 2px 4px;
 }
 
 @media (max-width: 480px) {
-  .task-item {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .task-text {
-    width: 100%;
-    order: 2;
-  }
-
-  .priority-badge {
-    order: 1;
-  }
-
-  .task-btn {
-    flex: 1;
-    padding: 8px;
-    text-align: center;
-  }
+  .task-item { flex-wrap: wrap; gap: 8px; }
+  .task-text { width: 100%; order: 2; }
+  .priority-badge { order: 1; }
+  .task-btn { flex: 1; padding: 8px; text-align: center; }
 }

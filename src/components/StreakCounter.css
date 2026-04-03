@@ -1,6 +1,6 @@
 .streak-card {
-  background: #1a1a24;
-  border: 1px solid #2a2a3a;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 18px 24px;
   margin-bottom: 14px;
@@ -10,13 +10,8 @@
   transition: border-color 0.3s;
 }
 
-.streak-card.streak-hot {
-  border-color: #f97316;
-}
-
-.streak-flame {
-  font-size: 2rem;
-}
+.streak-card.streak-hot { border-color: #f97316; }
+.streak-flame { font-size: 2rem; }
 
 .streak-info {
   display: flex;
@@ -32,17 +27,15 @@
 
 .streak-label {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .streak-msg {
   margin-left: auto;
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 480px) {
-  .streak-msg {
-    display: none;
-  }
+  .streak-msg { display: none; }
 }
