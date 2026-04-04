@@ -32,6 +32,32 @@ function TaskItem({ task, onComplete, onDelete, onEdit }) {
     }
   }
 
+  function isOverdue() {
+    if (!task.dueTime || task.completed) return false;
+    const now = new Date();
+    const [hours, minutes] = task.dueTime.split(":").map(Number);
+    const due = new Date();
+    due.setHours(hours, minutes, 0, 0);
+    return now > due;
+  }
+
+  function getTimeStatus() {
+    if (!task.dueTime) return null;
+    if (task.completed) return null;
+
+    const now = new Date();
+    const [hours, minutes] = task.dueTime.split(":").map(Number);
+    const due = new Date();
+    due.setHours(hours, minutes, 0, 0);
+
+    const diffMs = due - now;
+    const diffMins = Math.floor(diffMs / 60000);
+
+    if (diffMins < 0) return { label: "Overdue", className: "time-overdue" };
+    if (diffMins <= 30) return { label: `${diffMins}m left`, className: "time-soon" };
+    return { label: task.dueTime, className: "time-normal" };
+  }
+
   const priorityConfig = {
     high:   { label: "High",   className: "priority-high" },
     medium: { label: "Medium", className: "priority-medium" },
@@ -39,35 +65,45 @@ function TaskItem({ task, onComplete, onDelete, onEdit }) {
   };
 
   const priority = priorityConfig[task.priority] || priorityConfig.medium;
+  const timeStatus = getTimeStatus();
+  const overdue = isOverdue();
 
   return (
     <div
       className={`task-item ${task.completed ? "completed" : ""} task-enter ${
         isExiting ? "task-exit" : ""
-      } ${isEditing ? "editing" : ""}`}
+      } ${isEditing ? "editing" : ""} ${overdue ? "overdue" : ""}`}
     >
       <span className={`priority-badge ${priority.className}`}>
         {priority.label}
       </span>
 
-      {isEditing ? (
-        <input
-          className="task-edit-input"
-          value={editValue}
-          onChange={(e) => setEditValue(e.target.value)}
-          onBlur={handleEditSubmit}
-          onKeyDown={handleKeyDown}
-          autoFocus
-        />
-      ) : (
-        <span
-          className={`task-text ${task.completed ? "completed" : ""}`}
-          onDoubleClick={handleDoubleClick}
-          title={task.completed ? "" : "Double-click to edit"}
-        >
-          {task.text}
-        </span>
-      )}
+      <div className="task-main">
+        {isEditing ? (
+          <input
+            className="task-edit-input"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={handleEditSubmit}
+            onKeyDown={handleKeyDown}
+            autoFocus
+          />
+        ) : (
+          <span
+            className={`task-text ${task.completed ? "completed" : ""}`}
+            onDoubleClick={handleDoubleClick}
+            title={task.completed ? "" : "Double-click to edit"}
+          >
+            {task.text}
+          </span>
+        )}
+
+        {timeStatus && (
+          <span className={`task-time ${timeStatus.className}`}>
+            ⏰ {timeStatus.label}
+          </span>
+        )}
+      </div>
 
       <button
         className="task-btn complete-btn"

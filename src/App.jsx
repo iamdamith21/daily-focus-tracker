@@ -100,15 +100,16 @@ useEffect(() => {
       })
     : tasks;
 
-  function handleAddTask(taskText, priority) {
-    const newTask = {
-      id: Date.now(),
-      text: taskText,
-      completed: false,
-      priority: priority,
-    };
-    setTasks([...tasks, newTask]);
-  }
+function handleAddTask(taskText, priority, dueTime) {
+  const newTask = {
+    id: Date.now(),
+    text: taskText,
+    completed: false,
+    priority: priority,
+    dueTime: dueTime || null,
+  };
+  setTasks([...tasks, newTask]);
+}
 
   function handleComplete(id) {
     setTasks(

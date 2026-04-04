@@ -66,3 +66,64 @@
   .task-input-field { width: 100%; }
   .task-add-btn { width: 100%; padding: 12px; }
 }
+
+.task-input-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.task-time-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.time-label {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.time-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.time-input:focus {
+  border-color: var(--accent);
+}
+
+.time-clear-btn {
+  background: none;
+  border: 1px solid var(--border-hover);
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 5px 10px;
+  transition: all 0.2s;
+}
+
+.time-clear-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+@media (max-width: 480px) {
+  .task-input-row {
+    flex-wrap: wrap;
+  }
+
+  .task-time-row {
+    flex-wrap: wrap;
+  }
+}
